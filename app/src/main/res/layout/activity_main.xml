@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16px"
+        android:text="车源"
+        android:textColor="#000"
+        android:textSize="42px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cfcfcf"
+        android:gravity="center"
+        android:padding="10px"
+        android:text="搜索品牌/车型/指导价/配置/商家"
+        android:textColor="#7b7b7b"
+        android:textSize="36px" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_car_brand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
