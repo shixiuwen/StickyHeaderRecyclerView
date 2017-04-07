@@ -106,7 +106,8 @@ public class CarBrandItemDecoration extends RecyclerView.ItemDecoration {
             if (carBrandInfo.isFirstInGroup) {
                 c.drawRect(left, top - indexHeight, right, top, normalDividerPaint);
                 //将文字绘制到标签中间垂直区域
-                c.drawText(brand_index, left, top - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
+                c.drawText(brand_index, left,
+                        top - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
             }
         }
     }
@@ -129,7 +130,8 @@ public class CarBrandItemDecoration extends RecyclerView.ItemDecoration {
                 if (topViewBottom <= indexHeight) {
                     c.drawRect(left, 0, right, topViewBottom, topIndexPaint);
                     //将文字绘制到标签中间垂直区域
-                    c.drawText(carBrandInfo.getBrand_index(), left, topViewBottom - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
+                    c.drawText(carBrandInfo.getBrand_index(), left,
+                            topViewBottom - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
                     //如果偏移绘制了，不再执行下面的正常绘制操作
                     return;
                 }
@@ -138,7 +140,8 @@ public class CarBrandItemDecoration extends RecyclerView.ItemDecoration {
         //没有执行上面的偏移绘制，表示顶部标签未和下一条标签相接触，正常绘制出现的标签即可
         c.drawRect(left, 0, right, indexHeight, topIndexPaint);
         //绘制标签上的文字
-        c.drawText(carBrandInfo.getBrand_index(), left, indexHeight - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
+        c.drawText(carBrandInfo.getBrand_index(), left,
+                indexHeight - indexHeight / 2 + Math.abs(indexTextPaint.ascent() + indexTextPaint.descent()) / 2, indexTextPaint);
 
     }
 }
