@@ -1,0 +1,2 @@
+# StickyHeaderRecyclerView
+百余行代码实现RecyclerView标签吸顶粘滞滑动效果，演示了多类型显示
