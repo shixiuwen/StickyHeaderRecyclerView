@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.LinearLayout;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  * Description:侧边栏滑动定位索引
  */
 
-public class SlideBarView extends LinearLayout {
+public class SlideBarView extends View {
 
     private static final String TAG = SlideBarView.class.getSimpleName();
     private Context context;
@@ -46,7 +46,6 @@ public class SlideBarView extends LinearLayout {
     public SlideBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        setOrientation(VERTICAL);
 
         textColor = Color.argb(255, 255, 255, 255);
 
