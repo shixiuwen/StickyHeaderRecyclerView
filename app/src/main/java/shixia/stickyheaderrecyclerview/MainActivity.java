@@ -16,13 +16,18 @@ import java.util.List;
 import shixia.stickyheaderrecyclerview.bean.CarBrandInfo;
 import shixia.stickyheaderrecyclerview.sticky.CarBrandItemDecoration;
 import shixia.stickyheaderrecyclerview.sticky.CarBrandRecycleViewAdapter;
+import shixia.stickyheaderrecyclerview.view.SlideBarView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private TextView tvSearch;
     private RecyclerView rvCarBrand;
 
     private List<CarBrandInfo> mCarBrandList = new ArrayList<>();
+    private SlideBarView sbvBar;
+
+    private int scrollY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         tvSearch = (TextView) findViewById(R.id.tv_search);
         rvCarBrand = (RecyclerView) findViewById(R.id.rv_car_brand);
-        rvCarBrand.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvCarBrand.setLayoutManager(linearLayoutManager);
 
         try {
             JSONArray jsonArray = new JSONArray(json);
@@ -63,6 +70,38 @@ public class MainActivity extends AppCompatActivity {
 
         rvCarBrand.setAdapter(new CarBrandRecycleViewAdapter(this, mCarBrandList));
         rvCarBrand.addItemDecoration(new CarBrandItemDecoration(this, mCarBrandList));
+
+
+        sbvBar = (SlideBarView) findViewById(R.id.sbv_bar);
+        List<String> indexList = new ArrayList<>();
+        for (int i = 'A'; i <= 'Z'; i++) {
+            char a = (char) i;
+            indexList.add(String.valueOf(a));
+        }
+        sbvBar.setIndexList(indexList);
+        sbvBar.setOnIndexSelectedChangeListener(new SlideBarView.OnIndexSelectedChangeListener() {
+            @Override
+            public void onIndexSelectedChange(int indexSelected, String strIndex) {
+                for (int i = 0; i < mCarBrandList.size(); i++) {
+                    if (mCarBrandList.get(i).getBrand_index().equals(strIndex)) {
+                        int firstItemHeight = 300;  //定义好的（根据屏幕适配更改）
+                        int normalItemHeight = 120; //定义好的（根据屏幕适配更改）
+                        int indexDividerHeightSum = (indexSelected + 1) * 66;   //标签高度66是定义好的（根据屏幕适配更改）
+                        int normalDividerHeightSum = (i - indexSelected) * 2;
+                        rvCarBrand.scrollBy(0, (-scrollY) + (i - 1) * normalItemHeight + firstItemHeight + indexDividerHeightSum + normalDividerHeightSum);
+                        return;
+                    }
+                }
+            }
+        });
+
+        rvCarBrand.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                scrollY += dy;
+            }
+        });
     }
 
 
